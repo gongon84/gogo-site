@@ -32,9 +32,9 @@ key.push = '';
  
 //マップの作成（さくせい） 20x20マス
 var map = [
-	[0, 0, 0, 0, 1, 0, 0, 0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0],
+	[0, 1, 0, 0, 1, 0, 0, 0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0],
 	[0, 1, 0, 0, 0, 1, 1, 1 ,0 ,1 ,0 ,1 ,1 ,0 ,1 ,1 ,1 ,0 ,1 ,0],
-	[0, 0, 1, 1, 0, 0, 0, 1 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0],
+	[3, 0, 1, 1, 0, 0, 0, 1 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0],
 	[1, 0, 1, 0, 1, 1, 0, 0 ,0 ,1 ,1 ,1 ,1 ,1 ,0 ,0 ,1 ,0 ,1 ,0],
 	[0, 0, 0, 0, 0, 1, 1, 1 ,0 ,1 ,0 ,0 ,0 ,0 ,1 ,1 ,0 ,1 ,1 ,0],
 	[0, 1, 1, 1, 0, 0, 0, 0 ,0 ,1 ,0 ,1 ,1 ,1 ,0 ,1 ,0 ,0 ,0 ,0],
@@ -116,6 +116,10 @@ function main() {
 				if ( map[y][x] === 0 ) {
 					rico.move = squareSize;
 					key.push = 'down';
+				} else if (map[y][x] === 3) {
+					rico.move = squareSize;
+					key.push = 'down';
+					goal();
 				}
 			}
 		}
@@ -155,4 +159,21 @@ function keyupfunc( event ) {
 	if( key_code === 38 ) key.up = false;
 	if( key_code === 39 ) key.right = false;
 	if( key_code === 40 ) key.down = false;
+}
+
+// ゴールしたときのポップアップ
+function goal() {
+	var dialog = document.getElementById('dialog');
+	var yes = document.getElementById('yes');
+	var no = document.getElementById('no');
+
+	dialog.style.display = 'block';
+	yes.addEventListener('click', function(){ 
+		var url = "http://127.0.0.1:5500/lussy.html"
+		window.open(url, '_blank') 
+	});
+
+	no.addEventListener('click', function(){ 
+		dialog.style.display = 'none';
+	});
 }
