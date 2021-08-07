@@ -1,22 +1,26 @@
 //canvasの設定（せってい）
 var canvas = document.getElementById( 'canvas' );
-canvas.width = 640;		//canvasの横幅（よこはば）
-canvas.height = 640;	//canvasの縦幅（たてはば）
+squareSize = 48;
+canvas.width = squareSize*20;		//canvasの横幅（よこはば）
+canvas.height = squareSize*20;	//canvasの縦幅（たてはば）
  
 //コンテキストを取得（しゅとく）
 var ctx = canvas.getContext( '2d' );
+
+// xとy座標
+var xy = document.getElementById( 'xy' );
  
 //キャラクターのオブジェクトを作成
 var rico = new Object();
 rico.img = new Image();
-rico.img.src = 'img/test.png';
+rico.img.src = 'img/test2.png';
 rico.x = 0;
 rico.y = 0;
 rico.move = 0;
  
 //マップチップのImageオブジェクトを作る
 var mapchip = new Image();
-mapchip.src = 'img/map.png';
+mapchip.src = 'img/map2.png';
  
 //キーボードのオブジェクトを作成
 var key = new Object();
@@ -26,7 +30,7 @@ key.right = false;
 key.left = false;
 key.push = '';
  
-//マップの作成（さくせい）
+//マップの作成（さくせい） 20x20マス
 var map = [
 	[0, 0, 0, 0, 1, 0, 0, 0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0],
 	[0, 1, 0, 0, 0, 1, 1, 1 ,0 ,1 ,0 ,1 ,1 ,0 ,1 ,1 ,1 ,0 ,1 ,0],
@@ -52,62 +56,65 @@ var map = [
  
 //メインループ
 function main() {
-	//塗（ぬ）りつぶす色を指定（してい）
+	//塗りつぶす色を指定
 	ctx.fillStyle = "rgb( 0, 0, 0 )";
-	//塗（ぬ）りつぶす
-	ctx.fillRect(0, 0, 640, 640);
+	//塗りつぶす
+	ctx.fillRect(0, 0, canvas.width, canvas.height);
  
 	for (var y=0; y<map.length; y++) {
 		for (var x=0; x<map[y].length; x++) {
-			if ( map[y][x] === 0 ) ctx.drawImage( mapchip, 0, 0, 32, 32, 32*x, 32*y, 32, 32 );
-			if ( map[y][x] === 1 ) ctx.drawImage( mapchip, 32, 0, 32, 32, 32*x, 32*y, 32, 32 );
+			// map画像の左側を描画
+			if ( map[y][x] === 0 ) ctx.drawImage( mapchip, 0, 0, squareSize, squareSize, squareSize*x, squareSize*y, squareSize, squareSize );
+			// map画像の右側を描画
+			if ( map[y][x] === 1 ) ctx.drawImage( mapchip, squareSize, 0, squareSize, squareSize, squareSize*x, squareSize*y, squareSize, squareSize );
 		}
 	}
  
 	//画像を表示
 	ctx.drawImage( rico.img, rico.x, rico.y );
- 
+	
+	// キーを押したとき関数が呼ばれる
 	addEventListener("keydown", keydownfunc, false);
 	addEventListener("keyup", keyupfunc, false);
  
 	//方向キーが押されている場合（ばあい）は、りこちゃんが移動する
-	if ( rico.move === 0 ) {
+	if ( rico.move === 0 ) { // 止まってるとき
 		if ( key.left === true ) {
-			var x = rico.x/32;
-			var y = rico.y/32;
+			var x = rico.x/squareSize;
+			var y = rico.y/squareSize;
 			x--;
 			if ( map[y][x] === 0 ) {
-				rico.move = 32;
+				rico.move = squareSize;
 				key.push = 'left';
 			}
 		}
 		if ( key.up === true ) {
-			var x = rico.x/32;
-			var y = rico.y/32;
+			var x = rico.x/squareSize;
+			var y = rico.y/squareSize;
 			if ( y > 0) {
 				y--;
 				if ( map[y][x] === 0 ) {
-					rico.move = 32;
+					rico.move = squareSize;
 					key.push = 'up';
 				}
 			}
 		}
 		if ( key.right === true ) {
-			var x = rico.x/32;
-			var y = rico.y/32;
+			var x = rico.x/squareSize;
+			var y = rico.y/squareSize;
 			x++;
 			if ( map[y][x] === 0 ) {
-				rico.move = 32;
+				rico.move = squareSize;
 				key.push = 'right';
 			}
 		}
 		if ( key.down === true ) {
-			var x = rico.x/32;
-			var y = rico.y/32;
+			var x = rico.x/squareSize;
+			var y = rico.y/squareSize;
 			if ( y < 19 ) {
 				y++;
 				if ( map[y][x] === 0 ) {
-					rico.move = 32;
+					rico.move = squareSize;
 					key.push = 'down';
 				}
 			}
@@ -122,7 +129,10 @@ function main() {
 		if ( key.push === 'right' ) rico.x += 4;
 		if ( key.push === 'down' ) rico.y += 4;
 	}
- 
+	
+	// xy表示
+	xy.innerText = "x座標:y座標　" + rico.x + ":" + rico.y
+
 	requestAnimationFrame( main );
 }
 //ページと依存（いぞん）している全てのデータが読み込まれたら、メインループ開始
