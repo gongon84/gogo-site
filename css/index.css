@@ -1,0 +1,10 @@
+body {
+  background-color: #EEE; }
+  body .main {
+    margin: 50px auto;
+    text-align: center; }
+    body .main .title {
+      margin: 50px auto;
+      font-size: 3rem; }
+
+/*# sourceMappingURL=index.css.map */
