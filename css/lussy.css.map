@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,KAAM;EACF,KAAK,EAAE,IAAI;EACX,MAAM,EAAE,KAAK;EACb,gBAAgB,EAAE,sBAAsB",
+"sources": ["../sass/lussy.scss"],
+"names": [],
+"file": "lussy.css"
+}

@@ -21,6 +21,10 @@ rico.move = 0;
 //マップチップのImageオブジェクトを作る
 var mapchip = new Image();
 mapchip.src = 'img/map2.png';
+
+//マップチップのImageオブジェクトを作る
+var lussy = new Image();
+lussy.src = 'img/boss.png';
  
 //キーボードのオブジェクトを作成
 var key = new Object();
@@ -34,9 +38,9 @@ key.push = '';
 var map = [
 	[0, 1, 0, 0, 1, 0, 0, 0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0],
 	[0, 1, 0, 0, 0, 1, 1, 1 ,0 ,1 ,0 ,1 ,1 ,0 ,1 ,1 ,1 ,0 ,1 ,0],
-	[3, 0, 1, 1, 0, 0, 0, 1 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0],
+	[0, 0, 1, 1, 0, 0, 0, 1 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0],
 	[1, 0, 1, 0, 1, 1, 0, 0 ,0 ,1 ,1 ,1 ,1 ,1 ,0 ,0 ,1 ,0 ,1 ,0],
-	[0, 0, 0, 0, 0, 1, 1, 1 ,0 ,1 ,0 ,0 ,0 ,0 ,1 ,1 ,0 ,1 ,1 ,0],
+	[0, 3, 0, 0, 0, 1, 1, 1 ,0 ,1 ,0 ,0 ,0 ,0 ,1 ,1 ,0 ,1 ,1 ,0],
 	[0, 1, 1, 1, 0, 0, 0, 0 ,0 ,1 ,0 ,1 ,1 ,1 ,0 ,1 ,0 ,0 ,0 ,0],
 	[0, 1, 1, 1, 0, 1, 1, 1 ,1 ,1 ,0 ,1 ,0 ,0 ,0 ,0 ,1 ,1 ,1 ,0],
 	[0, 0, 0, 1, 0, 0, 0, 0 ,1 ,0 ,0 ,1 ,0 ,1 ,1 ,0 ,0 ,0 ,1 ,0],
@@ -67,6 +71,8 @@ function main() {
 			if ( map[y][x] === 0 ) ctx.drawImage( mapchip, 0, 0, squareSize, squareSize, squareSize*x, squareSize*y, squareSize, squareSize );
 			// map画像の右側を描画
 			if ( map[y][x] === 1 ) ctx.drawImage( mapchip, squareSize, 0, squareSize, squareSize, squareSize*x, squareSize*y, squareSize, squareSize );
+			// lussy
+			if ( map[y][x] === 3 ) ctx.drawImage( lussy, 0, 0, squareSize, squareSize, squareSize*x, squareSize*y, squareSize, squareSize );
 		}
 	}
  
@@ -169,7 +175,7 @@ function goal() {
 
 	dialog.style.display = 'block';
 	yes.addEventListener('click', function(){ 
-		var url = "http://127.0.0.1:5500/lussy.html"
+		var url = "https://gongon84.github.io/gogo-site/lussy"
 		window.open(url, '_blank') 
 	});
 
