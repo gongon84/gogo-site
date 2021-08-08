@@ -92,6 +92,10 @@ function main() {
 			if ( map[y][x] === 0 ) {
 				rico.move = squareSize;
 				key.push = 'left';
+			} else if (map[y][x] === 3) {
+				rico.move = squareSize;
+				key.push = 'left';
+				goal();
 			}
 		}
 		if ( key.up === true ) {
@@ -102,6 +106,10 @@ function main() {
 				if ( map[y][x] === 0 ) {
 					rico.move = squareSize;
 					key.push = 'up';
+				} else if (map[y][x] === 3) {
+					rico.move = squareSize;
+					key.push = 'up';
+					goal();
 				}
 			}
 		}
@@ -112,6 +120,10 @@ function main() {
 			if ( map[y][x] === 0 ) {
 				rico.move = squareSize;
 				key.push = 'right';
+			} else if (map[y][x] === 3) {
+				rico.move = squareSize;
+				key.push = 'right';
+				goal();
 			}
 		}
 		if ( key.down === true ) {
