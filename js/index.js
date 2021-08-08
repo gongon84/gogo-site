@@ -191,10 +191,10 @@ function goal() {
 	// yesをクリックしたとき
 	yes.addEventListener('click', function(){ 
 		var url = "https://gongon84.github.io/gogo-site/lussy"
-		if ( !test ){
-			test = window.open(url, '_blank')
+		if ( test === null ){
+			test.close()
 		} else {
-			test.close();
+			test = window.open(url, '_blank')
 		}
 		dialog.style.display = 'none';
 	});
@@ -212,5 +212,6 @@ function goal() {
 function closeDialog() {
 	if ( event.key === 'q' ) {
 		dialog.style.display = 'none';
+		window.opener.close()
 	}
 }
