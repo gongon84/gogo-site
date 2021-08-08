@@ -185,13 +185,32 @@ function goal() {
 	var yes = document.getElementById('yes');
 	var no = document.getElementById('no');
 
+	var test;
 	dialog.style.display = 'block';
+
+	// yesをクリックしたとき
 	yes.addEventListener('click', function(){ 
 		var url = "https://gongon84.github.io/gogo-site/lussy"
-		window.open(url, '_blank') 
+		if ( !test ){
+			test = window.open(url, '_blank')
+		} else {
+			test.close();
+		}
+		dialog.style.display = 'none';
 	});
 
+	// noをクリックしたとき
 	no.addEventListener('click', function(){ 
 		dialog.style.display = 'none';
 	});
+
+	// 関数呼び出し
+	document.body.addEventListener('keydown', closeDialog);
+}
+
+// ダイアログ閉じる
+function closeDialog() {
+	if ( event.key === 'q' ) {
+		dialog.style.display = 'none';
+	}
 }

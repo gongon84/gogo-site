@@ -1,5 +1,6 @@
 body {
-  background-color: #EEE; }
+  background-color: #EEE;
+  background-image: url("../img/marimo.png"); }
   body .main {
     margin: 50px auto;
     text-align: center;
