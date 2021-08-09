@@ -182,27 +182,20 @@ function keyupfunc( event ) {
 // ゴールしたときのポップアップ
 function goal() {
 	var dialog = document.getElementById('dialog');
-	var yes = document.getElementById('yes');
-	var no = document.getElementById('no');
 
-	var test;
 	dialog.style.display = 'block';
 
 	// yesをクリックしたとき
-	yes.addEventListener('click', function(){ 
+	document.getElementById('yes').onclick = function() {
 		var url = "https://gongon84.github.io/gogo-site/lussy"
-		if ( test === null ){
-			test.close()
-		} else {
-			test = window.open(url, '_blank')
-		}
-		dialog.style.display = 'none';
-	});
+		window.open(url, '_blank')
+		dialog.style.display = 'none'
+	};
 
 	// noをクリックしたとき
-	no.addEventListener('click', function(){ 
-		dialog.style.display = 'none';
-	});
+	document.getElementById('no').onclick = function() {
+		dialog.style.display = 'none'
+	};
 
 	// 関数呼び出し
 	document.body.addEventListener('keydown', closeDialog);
@@ -212,6 +205,5 @@ function goal() {
 function closeDialog() {
 	if ( event.key === 'q' ) {
 		dialog.style.display = 'none';
-		window.opener.close()
 	}
 }
